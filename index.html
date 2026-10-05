@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NEXORA — Tu dinero. Tus decisiones. Tu siguiente nivel.</title>
+<meta name="description" content="NEXORA te ayuda a entender, organizar y tomar mejores decisiones financieras.">
+<meta property="og:title" content="NEXORA — Tu dinero. Tus decisiones. Tu siguiente nivel.">
+<meta property="og:description" content="NEXORA te ayuda a entender, organizar y tomar mejores decisiones financieras.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0B0D0F">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2335D07F'/%3E%3Cpath d='M9 23V9l14 14V9' stroke='%230B0D0F' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B0D0F;--fg:#F7F8FA;--surf:#171A1F;--mut:#8B919B;--g:#35D07F;--gd:#168F55;--line:rgba(247,248,250,.09);--line2:rgba(247,248,250,.18);--r:16px;--max:1120px;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px;scroll-padding-top:calc(84px + env(safe-area-inset-top,0px));-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--fg);font:400 1rem/1.6 Manrope,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
+:focus-visible{outline:2px solid var(--g);outline-offset:3px;border-radius:6px}
+svg.i{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.wrap{width:min(var(--max),100% - 40px);margin-inline:auto}
+section{padding-block:clamp(72px,10vw,136px)}
+h1,h2,h3{line-height:1.1;letter-spacing:-.025em;font-weight:700}
+h1{font-size:clamp(2.4rem,6.2vw,4.6rem);font-weight:800}
+h2{font-size:clamp(1.8rem,4vw,2.9rem);max-width:18ch}
+h3{font-size:1.2rem;letter-spacing:-.01em}
+p{color:var(--mut)}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.75rem;font-weight:600;letter-spacing:.14em;color:var(--g);margin-bottom:22px}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--g)}
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 24px;border-radius:999px;font-weight:600;font-size:.95rem;transition:transform .2s,background .2s,border-color .2s,box-shadow .2s}
+.btn-p{background:var(--g);color:#06140D}
+.btn-p:hover{background:#4be08f;transform:translateY(-1px);box-shadow:0 8px 24px -10px rgba(53,208,127,.6)}
+.btn-p:active{transform:translateY(0) scale(.98)}
+.btn-s{border:1px solid var(--line2);color:var(--fg)}
+.btn-s:hover{border-color:var(--fg);background:rgba(247,248,250,.04)}
+.btn-sm{min-height:40px;padding:0 18px;font-size:.88rem}
+/* nav */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;padding-top:env(safe-area-inset-top,0px);border-bottom:1px solid transparent;transition:background .3s,border-color .3s,backdrop-filter .3s}
+.nav.scrolled{background:rgba(11,13,15,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.06em}
+.logo svg{width:28px;height:28px}
+.links{display:flex;align-items:center;gap:30px;list-style:none;padding:0}
+.links a:not(.btn),.links button.lnk{font-size:.92rem;color:var(--mut);transition:color .2s;position:relative;padding:6px 0}
+.links a:not(.btn):hover,.links button.lnk:hover,.links a[aria-current="true"]{color:var(--fg)}
+.links a[aria-current="true"]::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--g);border-radius:2px}
+.burger{display:none;width:44px;height:44px;border-radius:12px;align-items:center;justify-content:center}
+.burger span,.burger span::before,.burger span::after{display:block;width:20px;height:2px;background:var(--fg);border-radius:2px;position:relative;transition:transform .25s,background .25s}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+.burger[aria-expanded="true"] span{background:transparent}
+.burger[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+.burger[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+/* hero */
+.hero{padding-top:clamp(120px,16vw,190px);padding-bottom:clamp(56px,8vw,100px);position:relative}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 70% 10%,rgba(53,208,127,.09),transparent 70%);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(32px,5vw,72px);align-items:center;position:relative}
+.hero h1 span{display:block}.hero h1 span:last-child{color:var(--mut)}
+.hero .sub{font-size:clamp(1.02rem,1.6vw,1.2rem);max-width:46ch;margin:26px 0 36px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.trust{display:flex;gap:22px;flex-wrap:wrap;margin-top:34px;font-size:.85rem;color:var(--mut)}
+.trust b{color:var(--fg);font-weight:700}
+/* dashboard card */
+.dash{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 24px 60px -30px rgba(0,0,0,.8)}
+.dash-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;font-size:.82rem;color:var(--mut)}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:.75rem;font-weight:600;padding:4px 10px;border-radius:999px;border:1px solid rgba(53,208,127,.35);color:var(--g)}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.stat{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.stat small{display:block;font-size:.76rem;color:var(--mut);margin-bottom:4px}
+.stat strong{font-size:1.35rem;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat.big{grid-column:1/-1}.stat.big strong{font-size:2rem}
+.pos{color:var(--g)}.neg{color:var(--fg)}
+.chart{margin-top:14px;width:100%;height:auto;display:block;overflow:visible}
+.chart .grid{stroke:var(--line);stroke-width:1}
+.chart .ln{fill:none;stroke:var(--g);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.chart .ar{fill:url(#ag);opacity:0}
+.chart text{fill:var(--mut);font-size:11px;font-family:inherit}
+.chart .dot{fill:var(--bg);stroke:var(--g);stroke-width:2.5}
+.goal{margin-top:14px;display:flex;align-items:center;gap:12px;font-size:.8rem;color:var(--mut)}
+.bar{flex:1;height:6px;border-radius:6px;background:var(--bg);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--g);border-radius:6px;transition:width 1.2s .5s cubic-bezier(.2,.7,.2,1)}
+/* how */
+.head{margin-bottom:clamp(36px,5vw,64px)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.step{position:relative;background:var(--surf);border:1px solid var(--line);border-radius:var(--r);padding:28px;transition:transform .25s,border-color .25s,box-shadow .25s;cursor:pointer;text-align:left;display:block;width:100%}
+.step:hover,.step.on{transform:translateY(-6px);border-color:rgba(53,208,127,.5);box-shadow:0 18px 36px -24px rgba(0,0,0,.9)}
+.step .n{font-size:.85rem;color:var(--mut);font-weight:600}
+.step .ic{width:46px;height:46px;border-radius:12px;border:1px solid var(--line2);display:grid;place-items:center;margin:22px 0 20px;color:var(--fg);transition:color .25s,border-color .25s,transform .25s}
+.step:hover .ic,.step.on .ic{color:var(--g);border-color:var(--g);transform:scale(1.08)}
+.step p{margin-top:10px;font-size:.95rem}
+.step .more{position:absolute;left:28px;bottom:0;height:2px;width:0;background:var(--g);transition:width .4s}
+.step:hover .more,.step.on .more{width:calc(100% - 56px)}
+/* interactive dashboard */
+.tabs{display:inline-flex;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--surf);gap:2px;max-width:100%;overflow-x:auto}
+.tabs button{min-height:40px;padding:0 18px;border-radius:999px;font-size:.88rem;font-weight:600;color:var(--mut);white-space:nowrap;transition:background .2s,color .2s}
+.tabs button:hover{color:var(--fg)}
+.tabs button[aria-selected="true"]{background:var(--fg);color:var(--bg)}
+.panel{margin-top:28px;display:grid;grid-template-columns:1fr 2fr;gap:16px}
+.cards{display:grid;gap:10px;align-content:start}
+.cards .stat{padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.cards .stat small{margin:0}
+.cards .stat em{display:block;font-style:normal;font-size:.78rem;color:var(--mut)}
+.chartbox{position:relative;background:var(--surf);border:1px solid var(--line);border-radius:var(--r);padding:24px;transition:opacity .2s}
+.chartbox.load,.cards.load{opacity:.45}
+.chartbox h3{font-size:1rem;color:var(--mut);font-weight:500;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.delta{color:var(--g);font-weight:700}
+.ctx{margin-top:8px;font-size:.9rem;min-height:1.6em}
+.tip{position:absolute;transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:4px 10px;border-radius:8px;font-size:.8rem;font-weight:700;pointer-events:none;z-index:2}
+.tip[hidden]{display:none}
+.slide .badge{margin-bottom:18px}.res{margin-top:22px;max-width:46ch}
+/* banner */
+.banner{padding-block:0}
+.banner .box{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;border:1px solid var(--line2);border-radius:20px;padding:clamp(26px,4vw,44px);background:linear-gradient(180deg,rgba(53,208,127,.05),transparent)}
+.banner h2{max-width:24ch;font-size:clamp(1.4rem,3vw,2rem)}
+/* benefits */
+.ben{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(40px,6vw,80px) clamp(32px,6vw,96px);max-width:900px}
+.ben div{border-top:1px solid var(--line);padding-top:26px}
+.ben .ic{color:var(--g);margin-bottom:18px;display:block}
+.ben p{margin-top:8px;max-width:34ch}
+/* testimonials */
+.car{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.track{display:flex;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.slide{flex:0 0 100%;padding:clamp(32px,5vw,56px) 0;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end}
+.slide blockquote{font-size:clamp(1.3rem,2.8vw,2rem);line-height:1.35;letter-spacing:-.015em;font-weight:500;max-width:30ch;color:var(--fg)}
+.who{margin-top:26px;display:flex;align-items:center;gap:14px}
+.av{width:44px;height:44px;border-radius:50%;background:var(--surf);border:1px solid var(--line2);display:grid;place-items:center;font-weight:700;font-size:.9rem}
+.who b{display:block;line-height:1.3}.who span{font-size:.85rem;color:var(--mut)}
+.metric{text-align:right}
+.metric strong{display:block;font-size:2rem;color:var(--g);letter-spacing:-.02em}
+.metric span{font-size:.82rem;color:var(--mut)}
+.ctl{display:flex;justify-content:space-between;align-items:center;margin-top:24px}
+.dots{display:flex;gap:8px}
+.dots button{width:44px;height:44px;display:grid;place-items:center}
+.dots button::after{content:"";width:8px;height:8px;border-radius:8px;background:var(--line2);transition:width .3s,background .3s}
+.dots button[aria-current="true"]::after{width:26px;background:var(--g)}
+.arrows{display:flex;gap:8px}
+.arrows button{width:48px;height:48px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;transition:border-color .2s,background .2s}
+.arrows button:hover{border-color:var(--g);background:rgba(53,208,127,.08)}
+/* final cta */
+.final{text-align:center}
+.final .box{border:1px solid var(--line);border-radius:28px;padding:clamp(48px,9vw,110px) 24px;background:radial-gradient(70% 90% at 50% 120%,rgba(53,208,127,.14),transparent 70%),var(--surf)}
+.final h2{margin:0 auto 18px;max-width:20ch;font-size:clamp(2rem,5vw,3.4rem)}
+.final p.t{max-width:46ch;margin:0 auto 32px}
+.final small{display:block;margin-top:16px;color:var(--mut);font-size:.85rem}
+/* footer */
+footer{border-top:1px solid var(--line);padding:64px 0 36px}
+.fgrid{display:grid;grid-template-columns:1.4fr repeat(5,1fr);gap:32px}
+.fgrid h4{font-size:.85rem;margin-bottom:14px;font-weight:700}
+.fgrid ul{list-style:none;padding:0;display:grid;gap:4px}
+.fgrid a{color:var(--mut);font-size:.9rem;transition:color .2s;display:inline-block;padding:4px 0}
+.fgrid a:hover{color:var(--g)}
+.fgrid .brand p{font-size:.9rem;margin-top:14px;max-width:26ch}
+.legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-top:48px;padding-top:24px;border-top:1px solid var(--line);font-size:.85rem;color:var(--mut)}
+.legal nav{display:flex;gap:22px;flex-wrap:wrap}
+.legal a:hover{color:var(--fg)}
+/* modal */
+dialog{margin:auto;border:1px solid var(--line2);border-radius:22px;background:var(--surf);color:var(--fg);width:min(480px,100% - 32px);padding:30px;max-height:calc(100dvh - 32px);overflow:auto;opacity:0;transform:translateY(12px) scale(.98);transition:opacity .25s,transform .25s,display .25s allow-discrete,overlay .25s allow-discrete}
+dialog[open]{opacity:1;transform:none}
+@starting-style{dialog[open]{opacity:0;transform:translateY(12px) scale(.98)}}
+dialog::backdrop{background:rgba(0,0,0,.65);backdrop-filter:blur(3px)}
+.mx{position:absolute;top:14px;right:14px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:var(--mut)}
+.mx:hover{color:var(--fg);background:rgba(247,248,250,.06)}
+dialog h2{font-size:1.5rem;margin:6px 0 20px;max-width:none;padding-right:36px}
+.opts{display:grid;gap:10px}
+.opt{display:flex;justify-content:space-between;align-items:center;min-height:56px;padding:0 20px;border:1px solid var(--line2);border-radius:14px;font-weight:600;text-align:left;transition:border-color .2s,background .2s,transform .2s}
+.opt:hover{border-color:var(--g);background:rgba(53,208,127,.06);transform:translateX(3px)}
+.rec{animation:fade .35s}
+.rec p{color:var(--fg);margin-bottom:22px;font-size:1.05rem}
+.rec .btn{margin-right:8px}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}}
+/* toast */
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--fg);color:var(--bg);padding:12px 20px;border-radius:999px;font-weight:600;font-size:.9rem;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:100;max-width:calc(100% - 32px)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+/* reveal & entrance */
+[data-r]{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
+[data-r].in{opacity:1;transform:none}
+.pre .stat,.pre .dash-top,.pre .goal{opacity:0;transform:translateY(10px)}
+.stat,.dash-top,.goal{transition:opacity .5s,transform .5s}
+/* responsive */
+@media(max-width:960px){
+.hero-grid,.panel{grid-template-columns:1fr}
+.steps{grid-template-columns:1fr}
+.fgrid{grid-template-columns:repeat(3,1fr)}.fgrid .brand{grid-column:1/-1}
+.burger{display:flex}
+.links{position:fixed;inset:68px 0 auto 0;top:calc(68px + env(safe-area-inset-top,0px));flex-direction:column;align-items:stretch;gap:0;background:rgba(11,13,15,.97);border-bottom:1px solid var(--line);padding:12px 20px 24px;transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .25s,transform .25s,visibility .25s}
+.links.open{opacity:1;transform:none;visibility:visible}
+.links li{border-bottom:1px solid var(--line)}.links li:last-child{border:0;padding-top:16px}
+.links a:not(.btn),.links button.lnk{display:flex;align-items:center;min-height:52px;font-size:1.05rem;width:100%}
+.links a[aria-current="true"]::after{display:none}
+.links .btn{width:100%}
+}
+@media(max-width:640px){
+.ben{grid-template-columns:1fr}
+.slide{grid-template-columns:1fr;gap:20px}.metric{text-align:left}
+.fgrid{grid-template-columns:repeat(2,1fr)}
+.cta-row .btn,.banner .btn{width:100%}
+.stat.big strong{font-size:1.7rem}
+.legal{flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+[data-r],.pre .stat,.pre .dash-top,.pre .goal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-an" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+<symbol id="i-or" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 17.5h7M17.5 14v7"/></symbol>
+<symbol id="i-de" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.8 2.8L16 9.5"/></symbol>
+<symbol id="i-sh" viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6z"/></symbol>
+<symbol id="i-sp" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18"/></symbol>
+<symbol id="i-tg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+<symbol id="i-ey" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-ar" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-lf" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+</svg>
+
+<header class="nav" id="nav">
+<div class="wrap">
+<a href="#inicio" class="logo" aria-label="NEXORA, inicio">
+<svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#35D07F"/><path d="M9 23V9l14 14V9" stroke="#0B0D0F" stroke-width="3" fill="none"/></svg>NEXORA</a>
+<button class="burger" id="burger" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú"><span></span></button>
+<ul class="links" id="menu">
+<li><a href="#soluciones">Soluciones</a></li>
+<li><a href="#plataforma">Plataforma</a></li>
+<li><a href="#beneficios">Beneficios</a></li>
+<li><a href="#recursos">Recursos</a></li>
+<li><button class="lnk" data-toast="Demo: el inicio de sesión no está disponible.">Iniciar sesión</button></li>
+<li><button class="btn btn-p btn-sm open-modal">Probar la demo</button></li>
+</ul>
+</div>
+</header>
+
+<main id="inicio">
+<section class="hero pre" id="hero">
+<div class="wrap hero-grid">
+<div>
+<p class="eyebrow">FINANCIAL INTELLIGENCE</p>
+<h1><span>Tu dinero.</span><span style="color:var(--fg)">Tus decisiones.</span><span>Tu siguiente nivel.</span></h1>
+<p class="sub">NEXORA reúne tus ingresos, gastos y metas en un solo panel para que sepas cuánto puedes ahorrar y qué decisión tomar después. Pensada para jóvenes y emprendedores.</p>
+<div class="cta-row">
+<button class="btn btn-p open-modal">Analizar mi situación</button>
+<a href="#plataforma" class="btn btn-s">Ver el panel de ejemplo</a>
+</div>
+<div class="trust"><span>Demo interactiva</span><span>Sin registro</span><span>Datos de ejemplo</span></div>
+</div>
+<div class="dash" role="img" aria-label="Vista previa del panel de NEXORA con datos de ejemplo: saldo total, ingresos, gastos, margen disponible, ahorro del mes y progreso del fondo de emergencia">
+<div class="dash-top"><span>Resumen · <span data-k="month"></span></span><span class="badge">Datos de ejemplo</span></div>
+<div class="stats">
+<div class="stat big"><small>Saldo total hoy</small><strong data-k="bal"></strong></div>
+<div class="stat"><small>Ingresos del mes</small><strong class="pos">+<span data-k="inc"></span></strong></div>
+<div class="stat"><small>Gastos del mes</small><strong>-<span data-k="exp"></span></strong></div>
+<div class="stat"><small>Margen disponible</small><strong class="pos" data-k="mar"></strong></div>
+<div class="stat"><small>Ahorro estimado del mes</small><strong class="pos" data-k="sav"></strong></div>
+</div>
+<svg class="chart" id="heroChart" viewBox="0 0 600 200" aria-hidden="true"></svg>
+<div class="goal"><span>Fondo de emergencia</span><div class="bar"><i id="goalBar"></i></div><b style="color:var(--fg)" data-k="goalPct"></b></div>
+<p style="font-size:.78rem;margin-top:8px" data-k="goalLine"></p>
+</div>
+</div>
+</section>
+
+<section id="soluciones">
+<div class="wrap">
+<div class="head" data-r><p class="eyebrow">CÓMO FUNCIONA</p><h2>De la incertidumbre a la estrategia.</h2></div>
+<div class="steps">
+<button class="step" data-r aria-pressed="false"><span class="n">Paso 1</span><span class="ic"><svg class="i"><use href="#i-an"/></svg></span><h3>Entiende tu situación</h3><p>Registra tus ingresos y gastos del mes y mira cuánto te queda realmente.</p><span class="more"></span></button>
+<button class="step" data-r aria-pressed="false" style="transition-delay:.08s"><span class="n">Paso 2</span><span class="ic"><svg class="i"><use href="#i-or"/></svg></span><h3>Organiza tus datos</h3><p>Clasifica cada gasto por categoría y ponle un tope mensual a las más altas.</p><span class="more"></span></button>
+<button class="step" data-r aria-pressed="false" style="transition-delay:.16s"><span class="n">Paso 3</span><span class="ic"><svg class="i"><use href="#i-de"/></svg></span><h3>Toma una decisión</h3><p>Define una meta de ahorro y revisa si tu ritmo actual te permite llegar.</p><span class="more"></span></button>
+</div>
+</div>
+</section>
+
+<section id="plataforma" style="padding-top:0">
+<div class="wrap">
+<div class="head" data-r><p class="eyebrow">PLATAFORMA</p><h2>Tu panel, siempre claro.</h2><p style="margin-top:16px;max-width:46ch">Cambia el período y mira cómo se transforman los números. Son datos de ejemplo; pasa el cursor o desliza sobre el gráfico para ver cada valor.</p></div>
+<div class="tabs" role="tablist" aria-label="Período" id="tabs">
+<button role="tab" aria-selected="false" data-p="7d">7 días</button>
+<button role="tab" aria-selected="true" data-p="30d">30 días</button>
+<button role="tab" aria-selected="false" data-p="6m">6 meses</button>
+<button role="tab" aria-selected="false" data-p="1y">1 año</button>
+</div>
+<div class="panel" data-r>
+<div class="cards" id="cards" aria-live="polite">
+<div class="stat"><small>Saldo total<em>al cierre del período</em></small><strong id="v-bal"></strong></div>
+<div class="stat"><small>Ingresos<em>acumulado del período</em></small><strong id="v-inc" class="pos"></strong></div>
+<div class="stat"><small>Gastos<em>acumulado del período</em></small><strong id="v-exp"></strong></div>
+<div class="stat"><small>Margen disponible<em>ingresos − gastos</em></small><strong id="v-mar" class="pos"></strong></div>
+<div class="stat"><small>Ahorro estimado<em data-k="rateNote"></em></small><strong id="v-sav" class="pos"></strong></div>
+</div>
+<div class="chartbox" id="chartbox">
+<h3><span>Evolución del saldo total</span><span class="delta" id="delta">+4,8%</span></h3>
+<p class="ctx" id="ctx" aria-live="polite"></p><p class="ctx" id="eq"></p><p class="ctx" style="font-size:.78rem;min-height:0;margin-top:14px">Datos de ejemplo. Cálculo de demostración, no es asesoramiento financiero.</p><div class="tip" id="tip" hidden></div>
+<svg class="chart" id="mainChart" viewBox="0 0 600 260" role="img" aria-label="Gráfico de la evolución del saldo total en el período seleccionado"></svg>
+</div>
+</div>
+</div>
+</section>
+
+<section class="banner" aria-labelledby="bt">
+<div class="wrap" data-r><div class="box">
+<h2 id="bt">¿Sabes realmente hacia dónde va tu dinero?</h2>
+<div><p style="margin-bottom:14px;max-width:34ch">Elige un objetivo y recibe un primer paso concreto, calculado con datos de ejemplo.</p><button class="btn btn-p open-modal">Analizar mi situación</button></div>
+</div></div>
+</section>
+
+<section id="beneficios">
+<div class="wrap">
+<div class="head" data-r><p class="eyebrow">BENEFICIOS</p><h2>Diseñado para decisiones reales.</h2></div>
+<div class="ben">
+<div data-r><svg class="i ic"><use href="#i-sh"/></svg><h3>Control financiero</h3><p>Toda tu información financiera en un solo panel.</p></div>
+<div data-r><svg class="i ic"><use href="#i-sp"/></svg><h3>Análisis inteligente</h3><p>Ejemplo de análisis inteligente para identificar patrones y oportunidades.</p></div>
+<div data-r><svg class="i ic"><use href="#i-tg"/></svg><h3>Seguimiento de objetivos</h3><p>Define metas y mide tu avance semana a semana.</p></div>
+<div data-r><svg class="i ic"><use href="#i-ey"/></svg><h3>Visualización clara</h3><p>Gráficos simples que se entienden a primera vista.</p></div>
+</div>
+</div>
+</section>
+
+<section id="ejemplos" style="padding-top:0">
+<div class="wrap">
+<div class="head" data-r><p class="eyebrow">EJEMPLOS</p><h2>Lo que puedes conseguir con NEXORA.</h2></div>
+<div data-r>
+<div class="car" role="group" aria-roledescription="carrusel" aria-label="Ejemplos de uso">
+<div class="track" id="track">
+<figure class="slide" aria-label="1 de 3"><div><span class="badge">Ejemplo de experiencia</span><blockquote>“Quiero ahorrar, pero no sé cuánto puedo apartar cada mes.”</blockquote><p class="res">Con ingresos de <span data-k="inc"></span> y gastos de <span data-k="exp"></span>, el margen disponible es <span data-k="mar"></span>. Si destinas el <span data-k="rate"></span> de tus ingresos al ahorro, serían <span data-k="sav"></span> al mes.</p></div><div class="metric"><strong><span data-k="sav"></span></strong><span>ahorro mensual estimado (ejemplo)</span></div></figure>
+<figure class="slide" aria-label="2 de 3"><div><span class="badge">Ejemplo de experiencia</span><blockquote>“Mezclo los gastos de mi negocio con los personales.”</blockquote><p class="res">NEXORA los separa por categoría para ver qué parte de tus <span data-k="exp"></span> de gasto mensual corresponde a cada una.</p></div><div class="metric"><strong><span data-k="expPct"></span></strong><span>de los ingresos se va en gastos (ejemplo)</span></div></figure>
+<figure class="slide" aria-label="3 de 3"><div><span class="badge">Ejemplo de experiencia</span><blockquote>“Quiero tener un fondo para imprevistos.”</blockquote><p class="res">Una reserva de <span data-k="gm"></span> de gastos serían <span data-k="goal"></span>. Llevas <span data-k="saved"></span> (<span data-k="goalPct"></span>). <span data-k="etaSent"></span></p></div><div class="metric"><strong><span data-k="eta"></span></strong><span>para completar el fondo (estimación)</span></div></figure>
+</div>
+</div>
+<div class="ctl">
+<div class="dots" id="dots"></div>
+<div class="arrows"><button id="prev" aria-label="Ejemplo anterior"><svg class="i"><use href="#i-lf"/></svg></button><button id="next" aria-label="Ejemplo siguiente"><svg class="i"><use href="#i-ar"/></svg></button></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="final" id="comenzar" style="padding-top:0">
+<div class="wrap" data-r><div class="box">
+<h2>Tu próxima decisión financiera empieza hoy.</h2>
+<p class="t">Empieza a entender mejor tu dinero y convierte tus objetivos en una estrategia.</p>
+<button class="btn btn-p open-modal">Analizar mi situación</button>
+<small>Toma un minuto. Sin registro y con datos de ejemplo.</small>
+</div></div>
+</section>
+</main>
+
+<footer id="recursos">
+<div class="wrap">
+<div class="fgrid">
+<div class="brand"><a href="#inicio" class="logo"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#35D07F"/><path d="M9 23V9l14 14V9" stroke="#0B0D0F" stroke-width="3" fill="none"/></svg>NEXORA</a><p>Tu dinero. Tus decisiones. Tu siguiente nivel.</p></div>
+<div><h4>Producto</h4><ul><li><a href="#plataforma">Panel</a></li><li><a href="#beneficios">Beneficios</a></li></ul></div>
+<div><h4>Soluciones</h4><ul><li><a href="#soluciones">Cómo funciona</a></li><li><a href="#comenzar">Para emprendedores</a></li></ul></div>
+<div><h4>Recursos</h4><ul><li><a href="#ejemplos">Ejemplos</a></li><li><a href="#recursos">Guías</a></li></ul></div>
+<div><h4>Empresa</h4><ul><li><a href="#inicio">Nosotros</a></li><li><a href="#inicio">Contacto</a></li></ul></div>
+<div><h4>Soporte</h4><ul><li><a href="#recursos">Centro de ayuda</a></li><li><a href="#recursos">Estado</a></li></ul></div>
+</div>
+<div class="legal">
+<span>© 2026 NEXORA · Proyecto de demostración.</span>
+<nav aria-label="Redes sociales"><a href="#recursos">Instagram</a><a href="#recursos">LinkedIn</a><a href="#recursos">X</a><a href="#recursos">YouTube</a></nav>
+<nav aria-label="Legal"><a href="#recursos">Política de privacidad</a><a href="#recursos">Términos y condiciones</a></nav>
+</div>
+</div>
+</footer>
+
+<dialog id="modal" aria-labelledby="mt">
+<button class="mx" id="closeModal" aria-label="Cerrar"><svg class="i"><use href="#i-x"/></svg></button>
+<div id="mBody"></div>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+const $ = (s, c = document) => c.querySelector(s), $$ = (s, c = document) => [...c.querySelectorAll(s)];
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fmt = n => { const r = Math.round(n); return (r < 0 ? '−' : '') + '$' + Math.abs(r).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'); };
+
+/* Toast */
+let tt; const toast = m => { const t = $('#toast'); t.textContent = m; t.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('show'), 2600); };
+$$('[data-toast]').forEach(b => b.addEventListener('click', () => { toast(b.dataset.toast); closeMenu(); }));
+
+/* Navbar + menú móvil */
+const nav = $('#nav'), burger = $('#burger'), menu = $('#menu');
+const onScroll = () => nav.classList.toggle('scrolled', scrollY > 24);
+addEventListener('scroll', onScroll, { passive: true }); onScroll();
+function closeMenu() { menu.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); burger.setAttribute('aria-label', 'Abrir menú'); }
+burger.addEventListener('click', () => {
+  const open = menu.classList.toggle('open');
+  burger.setAttribute('aria-expanded', open); burger.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+});
+menu.addEventListener('click', e => { if (e.target.closest('a')) closeMenu(); });
+addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+/* Enlace activo según sección visible */
+const navLinks = $$('.links a[href^="#"]:not(.btn)');
+const secObs = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) navLinks.forEach(a => a.setAttribute('aria-current', a.getAttribute('href') === '#' + e.target.id));
+}), { rootMargin: '-45% 0px -50% 0px' });
+['soluciones', 'plataforma', 'beneficios'].forEach(id => secObs.observe($('#' + id)));
+
+/* Scroll reveal */
+const rev = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rev.unobserve(e.target); } }), { threshold: .15 });
+$$('[data-r]').forEach(el => rev.observe(el));
+
+/* Gráfico SVG reutilizable */
+const NS = 'http://www.w3.org/2000/svg';
+function drawChart(svg, series, labels, animate = true, names) {
+  const [W, H] = svg.viewBox.baseVal.width ? [svg.viewBox.baseVal.width, svg.viewBox.baseVal.height] : [600, 240];
+  const pl = 8, pr = 8, pt = 14, pb = labels.length ? 28 : 8;
+  const min = Math.min(...series), max = Math.max(...series), rng = max - min || 1;
+  const pts = series.map((v, i) => [pl + i * (W - pl - pr) / (series.length - 1), pt + (1 - (v - min) / rng) * (H - pt - pb)]);
+  let d = `M${pts[0][0]},${pts[0][1]}`;
+  for (let i = 1; i < pts.length; i++) { const mx = (pts[i - 1][0] + pts[i][0]) / 2; d += ` C${mx},${pts[i - 1][1]} ${mx},${pts[i][1]} ${pts[i][0]},${pts[i][1]}`; }
+  const last = pts[pts.length - 1], base = H - pb;
+  let g = '<defs><linearGradient id="ag' + svg.id + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#35D07F" stop-opacity=".22"/><stop offset="1" stop-color="#35D07F" stop-opacity="0"/></linearGradient></defs>';
+  for (let i = 0; i < 4; i++) { const y = pt + i * (base - pt) / 3; g += `<line class="grid" x1="0" x2="${W}" y1="${y}" y2="${y}"/>`; }
+  g += `<path class="ar" d="${d} L${last[0]},${base} L${pts[0][0]},${base}Z" style="fill:url(#ag${svg.id})"/>`;
+  g += `<path class="ln" d="${d}" pathLength="1"/>`;
+  g += `<circle class="dot" cx="${last[0]}" cy="${last[1]}" r="5"/>`;
+  labels.forEach(([i, l]) => { const x = pts[i][0]; g += `<text x="${x}" y="${H - 6}" text-anchor="${i === 0 ? 'start' : i === series.length - 1 ? 'end' : 'middle'}">${l}</text>`; });
+  svg.innerHTML = g;
+  if (svg.id === 'mainChart') {
+    const hv = document.createElementNS(NS, 'circle'); hv.setAttribute('r', 5); hv.setAttribute('class', 'dot'); hv.style.display = 'none'; svg.append(hv);
+    const tip = $('#tip');
+    svg.onpointermove = e => {
+      const r = svg.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * W; let k = 0, b = 1e9;
+      pts.forEach((q, i) => { const dd = Math.abs(q[0] - x); if (dd < b) { b = dd; k = i; } });
+      hv.setAttribute('cx', pts[k][0]); hv.setAttribute('cy', pts[k][1]); hv.style.display = '';
+      tip.textContent = (names ? names[k] + ' · ' : '') + fmt(series[k]); tip.hidden = false;
+      tip.style.left = (pts[k][0] / W * r.width + svg.offsetLeft) + 'px'; tip.style.top = (pts[k][1] / H * r.height + svg.offsetTop - 38) + 'px';
+    };
+    svg.onpointerleave = () => { hv.style.display = 'none'; tip.hidden = true; };
+  }
+  const ln = $('.ln', svg), ar = $('.ar', svg), dot = $('.dot', svg);
+  if (animate && !reduce) {
+    ln.style.cssText = 'stroke-dasharray:1;stroke-dashoffset:1';
+    ar.style.opacity = 0; dot.style.opacity = 0;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      ln.style.transition = 'stroke-dashoffset .9s cubic-bezier(.2,.7,.2,1)'; ln.style.strokeDashoffset = 0;
+      ar.style.transition = dot.style.transition = 'opacity .6s .5s'; ar.style.opacity = 1; dot.style.opacity = 1;
+    }));
+  } else { ar.style.opacity = 1; }
+}
+
+/* ===== 1. DATOS DEL DEMO (se sustituyen por datos reales) ===== */
+const DEMO = {
+  balanceNow: 12480,   // saldo total hoy (dato instantáneo)
+  savingsRate: 0.2,    // supuesto del demo: se destina el 20% de los ingresos al ahorro
+  emergencyMonths: 3,  // meta: reserva equivalente a 3 meses de gastos
+  goalSaved: 2400,     // aportado hasta hoy a la meta
+  projectionMonths: 12, // horizonte de la proyección de ahorro
+  months: [['Octubre', 3400, 2950], ['Noviembre', 3450, 2950], ['Diciembre', 3600, 3050], ['Enero', 3500, 2900], ['Febrero', 3550, 2900], ['Marzo', 3600, 2900],
+           ['Abril', 3650, 2900], ['Mayo', 3700, 2900], ['Junio', 3800, 2900], ['Julio', 3900, 2900], ['Agosto', 4000, 2500], ['Septiembre', 4250, 1820]] // [mes, ingresos, gastos]
+};
+
+/* ===== 2. CÁLCULOS ===== */
+const pf = n => n.toFixed(1).replace('.', ',').replace(/,0$/, '');
+const sumK = (l, k) => l.reduce((t, m) => t + m[k], 0);
+const ratio = (a, b) => b > 0 ? a / b * 100 : 0;
+const flows = (list, f = 1) => { const inc = sumK(list, 1) * f, exp = sumK(list, 2) * f; return { inc, exp, margin: inc - exp, sav: inc * DEMO.savingsRate }; };
+const monthsTo = (rem, cap) => rem <= 0 ? 0 : cap > 0 ? Math.max(1, Math.ceil(rem / cap - 1e-9)) : null;
+const M = DEMO.months, last = M[M.length - 1];
+const nm = i => M[i][0], ab = i => nm(i).slice(0, 3);
+const startBal = DEMO.balanceNow - M.reduce((t, m) => t + m[1] - m[2], 0);
+const endBal = []; M.reduce((b, m) => { const n = b + m[1] - m[2]; endBal.push(n); return n; }, startBal);
+const varText = (now, prev, ref) => 'Evolución del margen disponible: ' + (prev == null || prev <= 0 ? 'sin período anterior con el que comparar.' :
+  Math.abs((now - prev) / prev * 100) < 0.5 ? `se mantuvo estable frente ${ref}.` : `${now > prev ? 'aumentó' : 'disminuyó'} ${pf(Math.abs((now - prev) / prev * 100))}% frente ${ref}.`);
+/* Variación del saldo = (saldo final − saldo inicial) / saldo inicial; saldo final − inicial = ingresos − gastos */
+const mk = (f, s, l, n, scope, prev, ref) => {
+  const close = DEMO.balanceNow, open = close - f.margin, d = close - open, pc = open > 0 ? d / open * 100 : null, sg = d > 0 ? '+' : d < 0 ? '−' : '';
+  return { bal: close, ...f, s, l, n,
+    delta: `Variación del saldo ${sg}${fmt(Math.abs(d))}` + (pc === null ? '' : ` · ${sg}${pf(Math.abs(pc))}%`),
+    eq: `Saldo inicial (estimado) ${fmt(open)} + ingresos ${fmt(f.inc)} − gastos ${fmt(f.exp)} = saldo final ${fmt(close)}`,
+    ctx: scope + ' ' + varText(f.margin, prev, ref) };
+};
+const cl = i => 'Cierre ' + ab(i).toLowerCase(), seq = (n, fn) => Array.from({ length: n }, (_, k) => fn(k));
+const f7 = flows([last], 7 / 30), f30 = flows([last]), f6 = flows(M.slice(6)), f12 = flows(M);
+const prev30 = flows([M[10]]).margin, prev6 = flows(M.slice(0, 6)).margin;
+const DATA = {
+  '7d': mk(f7, seq(7, k => DEMO.balanceNow - f7.margin + f7.margin * (k + 1) / 7), [[0, 'Hace 6 d'], [2, 'Hace 4 d'], [4, 'Hace 2 d'], [6, 'Hoy']], seq(7, k => `Día ${k + 1} de 7 (estimado)`),
+    'Estimación basada en el ritmo mensual actual (7/30 del mes). No representa movimientos reales de 7 días; el gráfico es una proyección lineal.', null),
+  '30d': mk(f30, seq(7, k => DEMO.balanceNow - f30.margin + f30.margin * k / 6), [[0, 'Hace 30 d'], [2, 'Hace 20 d'], [4, 'Hace 10 d'], [6, 'Hoy']], seq(7, k => k === 0 ? 'Inicio del mes' : `Día ${5 * k} (estimado)`),
+    'Acumulado del mes actual (30 días); el gráfico avanza a ritmo uniforme (estimación).', prev30, `al mes anterior (${fmt(prev30)})`),
+  '6m': mk(f6, [endBal[5], ...endBal.slice(6)], [[0, 'Saldo inicial'], [2, cl(7)], [4, cl(9)], [6, cl(11)]], ['Saldo inicial', ...M.slice(6).map((_, k) => cl(6 + k))],
+    `Acumulado de ${nm(6).toLowerCase()} a ${nm(11).toLowerCase()}. El gráfico muestra el saldo inicial y el cierre de cada uno de los 6 meses.`, prev6, `a los 6 meses anteriores (${fmt(prev6)})`),
+  '1y': mk(f12, [startBal, ...endBal], [[0, 'Saldo inicial'], ...[3, 6, 9, 12].map(j => [j, cl(j - 1)])], ['Saldo inicial', ...M.map((_, k) => cl(k))],
+    'Acumulado de 12 meses. El gráfico muestra el saldo inicial y el cierre de cada uno de los 12 meses.', null)
+};
+/* Meta: fondo de emergencia = gastos mensuales × meses; ritmo = ahorro mensual */
+const goalAmt = last[2] * DEMO.emergencyMonths, remaining = Math.max(0, goalAmt - DEMO.goalSaved), goalPct = goalAmt > 0 ? Math.max(0, Math.min(100, DEMO.goalSaved / goalAmt * 100)) : 100, mo = monthsTo(remaining, f30.sav);
+const V = {
+  bal: fmt(DEMO.balanceNow), inc: fmt(f30.inc), exp: fmt(f30.exp), mar: fmt(f30.margin), sav: fmt(f30.sav),
+  rate: pf(DEMO.savingsRate * 100) + '%', expPct: f30.inc > 0 ? pf(ratio(f30.exp, f30.inc)) + '%' : null, goal: fmt(goalAmt), saved: fmt(DEMO.goalSaved), goalPct: Math.round(goalPct) + '%',
+  eta: mo === null ? 'sin estimación' : mo === 0 ? 'meta alcanzada' : `~${mo} ${mo === 1 ? 'mes' : 'meses'}`
+};
+V.month = nm(M.length - 1); V.gm = DEMO.emergencyMonths + (DEMO.emergencyMonths === 1 ? ' mes' : ' meses');
+V.etaSent = mo === 0 ? 'La meta ya está cubierta.' : mo === null ? 'Sin ahorro mensual no hay estimación.' : `Estimación: ${V.eta}.`;
+V.goalLine = `${V.saved} de ${V.goal} (${V.gm} de gastos). ` + (mo === 0 ? 'Meta alcanzada.' : mo === null ? 'Sin ahorro mensual no hay estimación.' : `Estimación: ${V.eta} al ritmo de ${V.sav} al mes.`);
+V.rateNote = 'estimación: ' + V.rate + ' de los ingresos';
+
+/* ===== 3. PRESENTACIÓN ===== */
+$$('[data-k]').forEach(e => e.textContent = V[e.dataset.k] ?? 'n/d');
+$('#goalBar').dataset.w = goalPct + '%';
+const ids = { bal: 'v-bal', inc: 'v-inc', exp: 'v-exp', margin: 'v-mar', sav: 'v-sav' };
+Object.keys(ids).forEach(k => $('#' + ids[k]).textContent = fmt(DATA['30d'][k]));
+const tween = (el, to, from) => {
+  if (reduce) { el.textContent = fmt(to); return; }
+  const t0 = performance.now();
+  (function f(t) { const p = Math.min((t - t0) / 450, 1), e = 1 - Math.pow(1 - p, 3); el.textContent = fmt(from + (to - from) * e); if (p < 1) requestAnimationFrame(f); })(t0);
+};
+let cur = DATA['30d'];
+function setPeriod(p, first) {
+  const d = DATA[p], box = $('#chartbox'), cards = $('#cards');
+  if (!first) { box.classList.add('load'); cards.classList.add('load'); }
+  setTimeout(() => {
+    Object.keys(ids).forEach(k => tween($('#' + ids[k]), d[k], cur[k]));
+    $('#delta').textContent = d.delta; $('#eq').textContent = d.eq; $('#ctx').textContent = d.ctx;
+    drawChart($('#mainChart'), d.s, d.l, true, d.n);
+    box.classList.remove('load'); cards.classList.remove('load'); cur = d;
+  }, first || reduce ? 0 : 160);
+}
+const tabs = $$('#tabs [role=tab]');
+tabs.forEach((t, i) => {
+  t.setAttribute('tabindex', t.getAttribute('aria-selected') === 'true' ? 0 : -1);
+  t.addEventListener('click', () => select(t));
+  t.addEventListener('keydown', e => {
+    const n = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+    if (n) { const x = tabs[(i + n + tabs.length) % tabs.length]; x.focus(); select(x); }
+  });
+});
+function select(t) {
+  tabs.forEach(b => { const on = b === t; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1; });
+  setPeriod(t.dataset.p);
+}
+/* El gráfico principal se dibuja al entrar en pantalla */
+new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { setPeriod('30d', true); o.disconnect(); } }, { threshold: .2 }).observe($('#mainChart'));
+
+/* Hero: entrada orquestada */
+drawChart($('#heroChart'), DATA['30d'].s, [], false);
+requestAnimationFrame(() => {
+  const h = $('#hero'); h.classList.remove('pre');
+  $$('.stat,.dash-top,.goal', h).forEach((el, i) => el.style.transitionDelay = (i * 70) + 'ms');
+  drawChart($('#heroChart'), DATA['30d'].s, [], true);
+  $('#goalBar').style.width = $('#goalBar').dataset.w;
+});
+
+/* Tarjetas de pasos: hover en escritorio, toque en móvil */
+$$('.step').forEach(s => s.addEventListener('click', () => {
+  const on = !s.classList.contains('on');
+  $$('.step').forEach(x => { x.classList.remove('on'); x.setAttribute('aria-pressed', 'false'); });
+  if (on) { s.classList.add('on'); s.setAttribute('aria-pressed', 'true'); }
+}));
+
+/* Modal */
+const modal = $('#modal'), mBody = $('#mBody');
+const REC = {
+  'Ahorrar': () => f30.margin <= 0 ? `Tu margen disponible es de ${V.mar} (${V.inc} − ${V.exp}): este mes no queda margen para ahorrar. Primer paso: revisar tus gastos.` : `Tu margen disponible es de ${V.mar} (${V.inc} − ${V.exp}). Con una tasa de ahorro estimada del ${V.rate}, podrías destinar aproximadamente ${V.sav} al ahorro mensual` + (f30.sav > f30.margin ? ', un monto que superaría tu margen disponible.' : ` y te quedarían ${fmt(f30.margin - f30.sav)} sin asignar.`),
+  'Invertir': () => `Simulación educativa: una reserva equivalente a ${V.gm} de gastos sería aproximadamente ${V.goal} (${V.exp} × ${DEMO.emergencyMonths}). Llevas ${V.saved} (${V.goalPct}). ${mo === 0 ? V.etaSent : mo === null ? V.etaSent : `Estimación: ${V.eta} al ritmo de ${V.sav} al mes.`}`,
+  'Organizar gastos': () => (V.expPct === null ? `Tus gastos de ejemplo son ${V.exp} al mes, pero sin ingresos no se puede calcular qué porcentaje representan.` : `Tus gastos de ejemplo son ${V.exp} al mes, un ${V.expPct} de tus ingresos.`) + ' Primer paso: clasifícalos en categorías y pon un tope a las dos más altas.',
+  'Crear un negocio': () => f30.sav <= 0 ? 'Sin ahorro mensual estimado no se puede proyectar un capital. Primer paso: definir cuánto podrías destinar al proyecto cada mes.' : `Si destinas tu ahorro mensual de ${V.sav} al proyecto, en ${DEMO.projectionMonths} meses podrías reunir aproximadamente ${fmt(f30.sav * DEMO.projectionMonths)}. La viabilidad real de un negocio depende de muchas más variables que el capital disponible.`
+};
+function step1() {
+  mBody.innerHTML = '<p class="eyebrow">DEMO · DATOS DE EJEMPLO</p><h2 id="mt">¿Cuál es tu objetivo principal?</h2><div class="opts">' +
+    Object.keys(REC).map(k => `<button class="opt" data-o="${k}">${k}<svg class="i"><use href="#i-ar"/></svg></button>`).join('') + '</div>';
+}
+function step2(o) {
+  mBody.innerHTML = `<div class="rec"><p class="eyebrow">RECOMENDACIÓN DE EJEMPLO</p><h2 id="mt">${o}</h2><p>${REC[o]()}</p><p style="font-size:.8rem;color:var(--mut);margin:-8px 0 22px">Cálculo de demostración, no es asesoramiento financiero.</p><button class="btn btn-p" id="mGo">Ver el panel de ejemplo</button><button class="btn btn-s" id="mBack">Cambiar objetivo</button></div>`;
+  $('#mGo').focus();
+}
+$$('.open-modal').forEach(b => b.addEventListener('click', () => { closeMenu(); step1(); modal.showModal(); }));
+mBody.addEventListener('click', e => {
+  const o = e.target.closest('[data-o]'); if (o) return step2(o.dataset.o);
+  if (e.target.closest('#mBack')) { step1(); $('.opt', mBody).focus(); }
+  if (e.target.closest('#mGo')) { modal.close(); $('#plataforma').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); }
+});
+$('#closeModal').addEventListener('click', () => modal.close());
+modal.addEventListener('click', e => { if (e.target === modal) modal.close(); });
+
+/* Carrusel */
+const track = $('#track'), slides = $$('.slide'), dotsEl = $('#dots'); let idx = 0;
+slides.forEach((_, i) => { const b = document.createElement('button'); b.setAttribute('aria-label', 'Ir al ejemplo ' + (i + 1)); b.addEventListener('click', () => go(i)); dotsEl.append(b); });
+function go(i) {
+  idx = (i + slides.length) % slides.length;
+  track.style.transform = `translateX(-${idx * 100}%)`;
+  $$('button', dotsEl).forEach((b, k) => b.setAttribute('aria-current', k === idx));
+  slides.forEach((s, k) => s.toggleAttribute('inert', k !== idx));
+}
+$('#prev').addEventListener('click', () => go(idx - 1));
+$('#next').addEventListener('click', () => go(idx + 1));
+let sx = null;
+track.addEventListener('touchstart', e => sx = e.touches[0].clientX, { passive: true });
+track.addEventListener('touchend', e => { if (sx === null) return; const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) go(idx + (dx < 0 ? 1 : -1)); sx = null; });
+go(0);
+
+})();
+</script>
+</body>
+</html>
